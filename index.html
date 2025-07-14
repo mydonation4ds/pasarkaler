@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masyarakat Pasar Kaler - Desa Tagog Apu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg { 
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), 
+                        url('https://upload.wikimedia.org/wikipedia/commons/e/e4/COLLECTIE_TROPENMUSEUM_Medewerkers_van_een_kalkbranderij_aan_de_voet_van_de_kalkrotsen_bij_Tagogapoe_TMnr_60025392.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        .text-shadow-lg {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .text-shadow-md {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+        
+        .card-hover { 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        
+        .card-hover:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+        }
+        
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: bounce 2s infinite;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            width: 90%;
+            max-width: 500px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-panel.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .admin-panel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-panel-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Top Banner */
+        .top-lyrics-banner {
+            background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #FF0000 100%);
+            padding: 12px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .top-lyrics-text {
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 18px;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            animation: scroll-left 50s linear infinite;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Indonesian Flag */
+        .flag-container {
+            position: relative;
+            width: 60px;
+            height: 40px;
+            margin-left: 20px;
+        }
+        
+        .flag {
+            width: 60px;
+            height: 40px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            border-radius: 2px;
+            animation: flagWave 3s ease-in-out infinite;
+        }
+        
+        .flag-red {
+            width: 100%;
+            height: 50%;
+            background: #FF0000;
+        }
+        
+        .flag-white {
+            width: 100%;
+            height: 50%;
+            background: #FFFFFF;
+        }
+        
+        @keyframes flagWave {
+            0%, 100% { transform: rotateY(0deg); }
+            25% { transform: rotateY(-8deg); }
+            50% { transform: rotateY(0deg); }
+            75% { transform: rotateY(8deg); }
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 80px 0 20px 0;
+        }
+        
+        .mobile-nav.active {
+            left: 0;
+        }
+        
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Finance Report */
+        .finance-tab {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .finance-tab.active {
+            background: #16a34a !important;
+            color: white !important;
+        }
+        
+        /* Chat Styles */
+        .chat-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+        
+        .chat-message {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .chat-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .chat-bubble {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        
+        .chat-name {
+            font-size: 11px;
+            color: #25D366;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .chat-text {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        
+        .chat-time {
+            font-size: 10px;
+            color: #666;
+            text-align: right;
+        }
+        
+        .chat-tabs {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .chat-tab {
+            flex: 1;
+            padding: 8px 12px;
+            text-align: center;
+            background: #f5f5f5;
+            color: #666;
+            cursor: pointer;
+            font-size: 12px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-tab.active {
+            background: #25D366;
+            color: white;
+        }
+        
+        .chat-content {
+            display: none;
+        }
+        
+        .chat-content.active {
+            display: block;
+        }
+        
+        /* Data Warga */
+        .data-tab {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .data-tab.active {
+            background: #2563eb !important;
+            color: white !important;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-attachment: scroll;
+            }
+            
+            .flag-container {
+                width: 45px;
+                height: 30px;
+            }
+            
+            .flag {
+                width: 45px;
+                height: 30px;
+            }
+            
+            .whatsapp-btn {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .top-lyrics-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Top Lyrics Banner -->
+    <div class="top-lyrics-banner">
+        <div class="top-lyrics-text">
+            🎵 Tanah airku tidak kulupakan • Kan terkenang selama hidupku • Biarpun saya pergi jauh • Tidak kan hilang dari kalbu • Tanah ku yang kucintai • Engkau ku hargai • Walaupun banyak negeri kujalani • Yang masyhur permai dikata orang • Tetapi kampung dan rumah ku • Di mana lahir dan besar aku • Itulah yang kubanggakan • Itulah yang mulia • 🎵 Ciptaan: Ibu Sud (Saridjah Niung) 🎵
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileNav()"></div>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#beranda" onclick="toggleMobileNav()" class="block px-6 py-4 text-gray-700 hover:bg-gray-100">
+            🏠 Beranda
+        </a>
+        <a href="#kegiatan" onclick="toggleMobileNav()" class="block px-6 py-4 text-gray-700 hover:bg-gray-100">
+            👥 Kegiatan
+        </a>
+        <a href="#berita" onclick="toggleMobileNav()" class="block px-6 py-4 text-gray-700 hover:bg-gray-100">
+            📰 Berita
+        </a>
+        <a href="#galeri" onclick="toggleMobileNav()" class="block px-6 py-4 text-gray-700 hover:bg-gray-100">
+            🖼️ Galeri
+        </a>
+        <a href="#kontak" onclick="toggleMobileNav()" class="block px-6 py-4 text-gray-700 hover:bg-gray-100">
+            📞 Kontak
+        </a>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Coat_of_arms_of_West_Java.svg" 
+                         alt="Logo Provinsi Jawa Barat" 
+                         class="w-14 h-14 object-contain">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-800">Pasar Kaler</h1>
+                        <p class="text-sm text-gray-600">Desa Tagog Apu • Jawa Barat</p>
+                    </div>
+                </div>
+                
+                <!-- Indonesian Flag -->
+                <div class="flag-container">
+                    <div class="flag">
+                        <div class="flag-red"></div>
+                        <div class="flag-white"></div>
+                    </div>
+                </div>
+
+                <button class="md:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileNav()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero-bg text-white py-20 relative">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-shadow-lg">Selamat Datang di Masyarakat Pasar Kaler</h2>
+            <p class="text-sm text-yellow-200 font-medium mb-2">🏔️ Warisan Sejarah Kalkrotsen Tagog Apu</p>
+            <p class="text-xl mb-8 max-w-2xl mx-auto text-shadow-md">Membangun komunitas yang solid dan harmonis melalui kegiatan sosial yang menyatukan warga RT 002 RW 004</p>
+            <div class="bg-black/40 backdrop-blur-sm rounded-lg p-6 max-w-md mx-auto mb-8 border border-white/20">
+                <p class="text-lg font-semibold text-yellow-300">Alamat Lengkap:</p>
+                <p class="text-sm">Kampung Pasar Kaler RT 002 RW 004</p>
+                <p class="text-sm">Kelurahan Desa Tagog Apu</p>
+                <p class="text-sm">Kecamatan Padalarang</p>
+                <p class="text-sm">Kabupaten Bandung Barat</p>
+                <p class="text-sm">Provinsi Jawa Barat</p>
+            </div>
+            <button onclick="joinActivity()" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition shadow-lg">
+                Bergabung dengan Kegiatan
+            </button>
+        </div>
+    </section>
+
+    <!-- Kegiatan Section -->
+    <section id="kegiatan" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">Kegiatan Sosial Masyarakat</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">👥</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Gotong Royong Rutin</h4>
+                    <p class="text-gray-600 mb-4">Kegiatan membersihkan lingkungan setiap hari Minggu pagi untuk menjaga kebersihan dan keindahan kampung.</p>
+                    <span class="text-sm text-green-600 font-semibold">Setiap Minggu • 07:00 WIB</span>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">📖</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Pengajian Mingguan</h4>
+                    <p class="text-gray-600 mb-4">Kajian keagamaan dan diskusi spiritual untuk mempererat tali silaturahmi antar warga.</p>
+                    <span class="text-sm text-blue-600 font-semibold">Setiap Kamis • 19:30 WIB</span>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">❤️</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Kegiatan Sosial</h4>
+                    <p class="text-gray-600 mb-4">Bantuan untuk warga yang membutuhkan, santunan anak yatim, dan program kesehatan gratis.</p>
+                    <span class="text-sm text-purple-600 font-semibold">Setiap Bulan • Fleksibel</span>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🎓</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Pelatihan Keterampilan</h4>
+                    <p class="text-gray-600 mb-4">Workshop jahit, masak, dan keterampilan lainnya untuk meningkatkan ekonomi keluarga.</p>
+                    <span class="text-sm text-orange-600 font-semibold">Setiap Bulan • 14:00 WIB</span>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🌙</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Ronda Malam</h4>
+                    <p class="text-gray-600 mb-4">Sistem keamanan kampung dengan jadwal ronda yang teratur untuk menjaga ketertiban.</p>
+                    <span class="text-sm text-red-600 font-semibold">Setiap Hari • 21:00-05:00 WIB</span>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">♻️</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Pengelolaan Sampah</h4>
+                    <p class="text-gray-600 mb-4">Program daur ulang dan pengelolaan sampah mandiri untuk lingkungan yang lebih sehat.</p>
+                    <span class="text-sm text-teal-600 font-semibold">Setiap Hari • 06:00 WIB</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Berita Section -->
+    <section id="berita" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">Berita & Pengumuman</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <article class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600"></div>
+                    <div class="p-6">
+                        <span class="text-sm text-blue-600 font-semibold">14 Juli 2025</span>
+                        <h4 class="text-xl font-semibold mb-3 mt-2">Perayaan 17 Agustus 2025</h4>
+                        <p class="text-gray-600 mb-4">Persiapan lomba dan kegiatan kemerdekaan untuk memeriahkan HUT RI ke-80...</p>
+                        <button onclick="showNewsDetail('17agustus')" class="text-blue-600 font-semibold hover:underline">Baca Selengkapnya</button>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600"></div>
+                    <div class="p-6">
+                        <span class="text-sm text-green-600 font-semibold">10 Juli 2025</span>
+                        <h4 class="text-xl font-semibold mb-3 mt-2">Program Vaksinasi Gratis</h4>
+                        <p class="text-gray-600 mb-4">Kerjasama dengan Puskesmas setempat untuk memberikan layanan vaksinasi...</p>
+                        <button onclick="showNewsDetail('vaksinasi')" class="text-green-600 font-semibold hover:underline">Baca Selengkapnya</button>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-br from-orange-500 to-red-600"></div>
+                    <div class="p-6">
+                        <span class="text-sm text-orange-600 font-semibold">5 Juli 2025</span>
+                        <h4 class="text-xl font-semibold mb-3 mt-2">Renovasi Balai Warga</h4>
+                        <p class="text-gray-600 mb-4">Swadaya masyarakat untuk memperbaiki fasilitas umum di kampung...</p>
+                        <button onclick="showNewsDetail('renovasi')" class="text-orange-600 font-semibold hover:underline">Baca Selengkapnya</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Section -->
+    <section id="galeri" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">Galeri Kegiatan</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="h-48 rounded-lg card-hover cursor-pointer relative overflow-hidden group bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center" onclick="showGalleryImage('upacara', 'Upacara Bendera 17 Agustus')">
+                    <div class="text-white text-center">
+                        <div class="text-4xl mb-2">🇮🇩</div>
+                        <h4 class="font-bold">Upacara Bendera</h4>
+                        <p class="text-sm opacity-80">17 Agustus 2025</p>
+                    </div>
+                </div>
+                
+                <div class="h-48 rounded-lg card-hover cursor-pointer relative overflow-hidden group bg-gradient-to-br from-green-400 to-blue-600 flex items-center justify-center" onclick="showGalleryImage('angklung', 'Kegiatan Angklung Warga')">
+                    <div class="text-white text-center">
+                        <div class="text-4xl mb-2">🎵</div>
+                        <h4 class="font-bold">Kegiatan Angklung</h4>
+                        <p class="text-sm opacity-80">Seni Budaya Tradisional</p>
+                    </div>
+                </div>
+                
+                <div class="h-48 rounded-lg card-hover cursor-pointer relative overflow-hidden group bg-gradient-to-br from-yellow-400 to-orange-600 flex items-center justify-center" onclick="showGalleryImage('kolak', 'Kolak Pisang dan Ubi')">
+                    <div class="text-white text-center">
+                        <div class="text-4xl mb-2">🍲</div>
+                        <h4 class="font-bold">Kolak Pisang Ubi</h4>
+                        <p class="text-sm opacity-80">Makanan Tradisional</p>
+                    </div>
+                </div>
+                
+                <div class="h-48 rounded-lg card-hover cursor-pointer relative overflow-hidden group bg-gradient-to-br from-red-400 to-pink-600 flex items-center justify-center" onclick="showGalleryImage('seblak', 'Seblak Khas Garut')">
+                    <div class="text-white text-center">
+                        <div class="text-4xl mb-2">🌶️</div>
+                        <h4 class="font-bold">Seblak Garut</h4>
+                        <p class="text-sm opacity-80">Kuliner Lokal</p>
+                    </div>
+                </div>
+                
+                <div class="h-48 rounded-lg card-hover cursor-pointer relative overflow-hidden group bg-gradient-to-br from-purple-400 to-indigo-600 flex items-center justify-center" onclick="showGalleryImage('kopi-warga', 'Kegiatan Kopi Warga')">
+                    <div class="text-white text-center">
+                        <div class="text-4xl mb-2">☕</div>
+                        <h4 class="font-bold">Kopi Warga</h4>
+                        <p class="text-sm opacity-80">Ngopi Bareng Setiap Sore</p>
+                    </div>
+                </div>
+                
+                <div class="h-48 rounded-lg card-hover cursor-pointer relative overflow-hidden group bg-gradient-to-br from-teal-400 to-green-600 flex items-center justify-center" onclick="showGalleryImage('gotong-royong', 'Tradisi Gotong Royong')">
+                    <div class="text-white text-center">
+                        <div class="text-4xl mb-2">🤝</div>
+                        <h4 class="font-bold">Gotong Royong</h4>
+                        <p class="text-sm opacity-80">Tradisi Unggahan Bonokeling</p>
+                    </div>
+                </div>
+                
+                <div class="h-48 rounded-lg card-hover cursor-pointer relative overflow-hidden group bg-gradient-to-br from-indigo-400 to-purple-600 flex items-center justify-center" onclick="showGalleryImage('pelatihan-keterampilan', 'Pelatihan Keterampilan')">
+                    <div class="text-white text-center">
+                        <div class="text-4xl mb-2">🎓</div>
+                        <h4 class="font-bold">Pelatihan Keterampilan</h4>
+                        <p class="text-sm opacity-80">Program Gubernur Jawa Barat</p>
+                    </div>
+                </div>
+                
+                <div class="h-48 rounded-lg card-hover cursor-pointer relative overflow-hidden group bg-gradient-to-br from-gray-400 to-blue-600 flex items-center justify-center" onclick="showGalleryImage('pos-ronda', 'Pos Ronda Siskamling')">
+                    <div class="text-white text-center">
+                        <div class="text-4xl mb-2">🏠</div>
+                        <h4 class="font-bold">Pos Ronda Siskamling</h4>
+                        <p class="text-sm opacity-80">Sistem Keamanan Lingkungan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Features -->
+    <section class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">Fitur Interaktif</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+                <!-- Finance Report -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-xl font-semibold">Laporan Keuangan RT</h4>
+                        <div class="flex space-x-2">
+                            <button onclick="showFinanceReport('monthly')" class="finance-tab active bg-green-600 text-white px-3 py-1 rounded text-sm">Bulanan</button>
+                            <button onclick="showFinanceReport('yearly')" class="finance-tab bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm">Tahunan</button>
+                        </div>
+                    </div>
+                    
+                    <div id="monthly-report">
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <div class="text-xs text-green-600 font-medium">Pemasukan</div>
+                                <div class="text-lg font-bold text-green-700">Rp 2.450.000</div>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <div class="text-xs text-red-600 font-medium">Pengeluaran</div>
+                                <div class="text-lg font-bold text-red-700">Rp 1.890.000</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-3 rounded-lg mb-4">
+                            <div class="text-xs text-blue-600 font-medium">Saldo Bulan Ini</div>
+                            <div class="text-xl font-bold text-blue-700">Rp 560.000</div>
+                        </div>
+                        
+                        <button onclick="showDetailedReport()" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition text-sm">
+                            Lihat Detail Lengkap
+                        </button>
+                    </div>
+                    
+                    <div id="yearly-report" style="display: none;">
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <div class="text-xs text-green-600 font-medium">Total Pemasukan</div>
+                                <div class="text-lg font-bold text-green-700">Rp 16.800.000</div>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <div class="text-xs text-red-600 font-medium">Total Pengeluaran</div>
+                                <div class="text-lg font-bold text-red-700">Rp 14.200.000</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-3 rounded-lg mb-4">
+                            <div class="text-xs text-blue-600 font-medium">Saldo Akhir Tahun</div>
+                            <div class="text-xl font-bold text-blue-700">Rp 2.600.000</div>
+                        </div>
+                        
+                        <button onclick="downloadYearlyReport()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition text-sm">
+                            Download Laporan PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Data Warga -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-xl font-semibold">Data Warga RT 002</h4>
+                        <div class="flex space-x-2">
+                            <button onclick="showDataForm('add')" class="data-tab active bg-blue-600 text-white px-3 py-1 rounded text-sm">Tambah Data</button>
+                            <button onclick="showDataForm('view')" class="data-tab bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm">Lihat Data</button>
+                        </div>
+                    </div>
+                    
+                    <div id="add-data-form">
+                        <form class="space-y-4">
+                            <input type="text" placeholder="Nama Lengkap" class="w-full p-2 border border-gray-300 rounded-lg text-sm">
+                            <select class="w-full p-2 border border-gray-300 rounded-lg text-sm">
+                                <option>Status Keluarga</option>
+                                <option>Kepala Keluarga</option>
+                                <option>Istri</option>
+                                <option>Anak</option>
+                            </select>
+                            <div class="grid grid-cols-2 gap-3">
+                                <select class="p-2 border border-gray-300 rounded-lg text-sm">
+                                    <option>Jenis Kelamin</option>
+                                    <option>Pria</option>
+                                    <option>Wanita</option>
+                                </select>
+                                <input type="number" placeholder="Usia" class="p-2 border border-gray-300 rounded-lg text-sm">
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition text-sm">
+                                Simpan Data Warga
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div id="view-data-form" style="display: none;">
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <div class="text-xs text-blue-600 font-medium">Total Warga</div>
+                                <div class="text-lg font-bold text-blue-700">47</div>
+                            </div>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <div class="text-xs text-green-600 font-medium">Kepala Keluarga</div>
+                                <div class="text-lg font-bold text-green-700">15</div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2 max-h-48 overflow-y-auto mb-4">
+                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded text-xs">
+                                <div>
+                                    <div class="font-medium">Budi Santoso</div>
+                                    <div class="text-gray-500">Kepala Keluarga • Pria • 45 thn</div>
+                                </div>
+                                <div class="text-blue-600 font-medium">KK</div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded text-xs">
+                                <div>
+                                    <div class="font-medium">Siti Rahayu</div>
+                                    <div class="text-gray-500">Istri • Wanita • 42 thn</div>
+                                </div>
+                                <div class="text-pink-600 font-medium">IST</div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="exportWargaData()" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition text-sm">
+                            Export Excel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="kontak" class="py-16 bg-gray-800 text-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12">Kontak Kami</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Informasi Kontak</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">📍</span>
+                            <span>RT 002 RW 004, Desa Tagog Apu, Cempaka Mekar, Padalarang, Bandung Barat</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">📞</span>
+                            <span>+62 812-3456-7890 (Ketua RT)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">📧</span>
+                            <span>pasarkaler.rt002@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Pengurus RT</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span>Ketua RT:</span>
+                            <span class="font-semibold">Ibu Wiwin</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sekretaris:</span>
+                            <span class="font-semibold">Ibu Siti Cenah</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Bendahara:</span>
+                            <span class="font-semibold">Agnia Istighfarin</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Koordinator Keamanan:</span>
+                            <span class="font-semibold">Bapak Pam Satpam</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm text-gray-400">© 2025 Website Resmi RT 002 RW 004 Pasar Kaler. Dibuat dengan ❤️ untuk mempererat tali persaudaraan warga.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float" id="whatsappFloat">
+        <div class="whatsapp-btn" onclick="handleWhatsAppClick()">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.106"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Admin Panel Overlay -->
+    <div class="admin-panel-overlay" id="adminOverlay" onclick="hideAdminPanel()"></div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 20px; border-radius: 15px 15px 0 0; position: relative;">
+            <button onclick="hideAdminPanel()" style="position: absolute; top: 15px; right: 15px; background: rgba(255, 255, 255, 0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">×</button>
+            <h3 class="text-xl font-bold mb-2">Admin & Pengurus RT 002</h3>
+            <p class="text-sm opacity-90">Hubungi pengurus untuk bantuan dan informasi</p>
+        </div>
+        
+        <!-- Chat Tabs -->
+        <div class="chat-tabs">
+            <button class="chat-tab active" onclick="showChatTab('contacts')">Kontak</button>
+            <button class="chat-tab" onclick="showChatTab('group-chat')">Chat Grup</button>
+            <button class="chat-tab" onclick="showChatTab('announcements')">Pengumuman</button>
+        </div>
+        
+        <!-- Contacts Tab -->
+        <div class="chat-content active" id="contacts-tab">
+            <div style="padding: 20px;">
+                <div onclick="contactAdmin('628123456789', 'Ibu Wiwin')" style="display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: 15px;">IW</div>
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0; font-size: 16px; color: #333;">Ibu Wiwin</h4>
+                        <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Ketua RT 002</p>
+                    </div>
+                    <div style="padding: 4px 8px; border-radius: 12px; font-size: 12px; background: #dcfce7; color: #166534;">Online</div>
+                </div>
+                
+                <div onclick="contactAdmin('628123456788', 'Ibu Siti Cenah')" style="display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: 15px;">SC</div>
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0; font-size: 16px; color: #333;">Ibu Siti Cenah</h4>
+                        <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Sekretaris RT</p>
+                    </div>
+                    <div style="padding: 4px 8px; border-radius: 12px; font-size: 12px; background: #dcfce7; color: #166534;">Online</div>
+                </div>
+                
+                <div onclick="contactAdmin('628123456787', 'Agnia Istighfarin')" style="display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: 15px;">AI</div>
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0; font-size: 16px; color: #333;">Agnia Istighfarin</h4>
+                        <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Bendahara RT</p>
+                    </div>
+                    <div style="padding: 4px 8px; border-radius: 12px; font-size: 12px; background: #fef2f2; color: #991b1b;">Offline</div>
+                </div>
+                
+                <div onclick="contactAdmin('628123456786', 'Bapak Pam Satpam')" style="display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: 15px;">PS</div>
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0; font-size: 16px; color: #333;">Bapak Pam Satpam</h4>
+                        <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Koordinator Keamanan</p>
+                    </div>
+                    <div style="padding: 4px 8px; border-radius: 12px; font-size: 12px; background: #dcfce7; color: #166534;">Online</div>
+                </div>
+                
+                <div onclick="joinGroupChat()" style="display: flex; align-items: center; padding: 15px; cursor: pointer;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: 15px;">👥</div>
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0; font-size: 16px; color: #333;">Grup RT 002 - Pasar Kaler</h4>
+                        <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Gabung grup WhatsApp warga</p>
+                    </div>
+                    <div style="padding: 4px 8px; border-radius: 12px; font-size: 12px; background: #dcfce7; color: #166534;">124 anggota</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Group Chat Tab -->
+        <div class="chat-content" id="group-chat-tab">
+            <div style="background: #25D366; color: white; padding: 10px; margin-bottom: 10px;">
+                <h5 style="margin: 0; font-size: 14px; font-weight: 600;">RT 002 - Pasar Kaler</h5>
+                <p style="margin: 0; font-size: 11px; opacity: 0.9;">124 anggota • 18 online</p>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-message">
+                    <div class="chat-avatar">IW</div>
+                    <div class="chat-bubble">
+                        <div class="chat-name">Ibu Wiwin (Ketua RT)</div>
+                        <div class="chat-text">Assalamualaikum warga RT 002. Selamat pagi semua! 🌅</div>
+                        <div class="chat-time">07:30</div>
+                    </div>
+                </div>
+                
+                <div class="chat-message">
+                    <div class="chat-avatar">SC</div>
+                    <div class="chat-bubble">
+                        <div class="chat-name">Ibu Siti Cenah (Sekretaris)</div>
+                        <div class="chat-text">Waalaikumsalam bu. Selamat pagi juga 😊</div>
+                        <div class="chat-time">07:32</div>
+                    </div>
+                </div>
+                
+                <div class="chat-message">
+                    <div class="chat-avatar">RH</div>
+                    <div class="chat-bubble">
+                        <div class="chat-name">Pak Rahmat (Warga)</div>
+                        <div class="chat-text">Pagi bu, mau tanya jadwal gotong royong minggu ini kapan ya?</div>
+                        <div class="chat-time">07:35</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Announcements Tab -->
+        <div class="chat-content" id="announcements-tab">
+            <div style="background: #25D366; color: white; padding: 10px; margin-bottom: 10px;">
+                <h5 style="margin: 0; font-size: 14px; font-weight: 600;">Pengumuman Resmi</h5>
+                <p style="margin: 0; font-size: 11px; opacity: 0.9;">Berita dan info penting dari pengurus RT</p>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-message">
+                    <div class="chat-avatar">IW</div>
+                    <div class="chat-bubble">
+                        <div class="chat-name">Ibu Wiwin (Ketua RT)</div>
+                        <div class="chat-text">📢 PENGUMUMAN PENTING: Dalam rangka memperingati HUT RI ke-80, RT 002 akan mengadakan berbagai lomba pada 17 Agustus 2025.</div>
+                        <div class="chat-time">Kemarin 10:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation
+        function toggleMobileNav() {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+            
+            mobileNav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            
+            if (mobileNav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // WhatsApp Admin Panel
+        function handleWhatsAppClick() {
+            showAdminPanel();
+        }
+        
+        function showAdminPanel() {
+            document.getElementById('adminOverlay').classList.add('show');
+            document.getElementById('adminPanel').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hideAdminPanel() {
+            document.getElementById('adminOverlay').classList.remove('show');
+            document.getElementById('adminPanel').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function contactAdmin(phoneNumber, name) {
+            const message = "Halo " + name + ", saya ingin menanyakan tentang kegiatan RT 002 Pasar Kaler. Terima kasih.";
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = "https://wa.me/" + phoneNumber + "?text=" + encodedMessage;
+            window.open(whatsappUrl, '_blank');
+            hideAdminPanel();
+        }
+        
+        function joinGroupChat() {
+            alert('Fitur bergabung ke grup WhatsApp akan segera tersedia! Anda akan diarahkan ke grup "RT 002 - Pasar Kaler" dengan 124 anggota aktif.');
+            hideAdminPanel();
+        }
+
+        // Chat Tabs
+        function showChatTab(tabName) {
+            document.querySelectorAll('.chat-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.chat-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+
+        // Finance Report
+        function showFinanceReport(type) {
+            document.querySelectorAll('.finance-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            
+            if (type === 'monthly') {
+                document.getElementById('monthly-report').style.display = 'block';
+                document.getElementById('yearly-report').style.display = 'none';
+            } else {
+                document.getElementById('monthly-report').style.display = 'none';
+                document.getElementById('yearly-report').style.display = 'block';
+            }
+        }
+        
+        function showDetailedReport() {
+            alert('Laporan keuangan detail akan menampilkan grafik pemasukan & pengeluaran, rincian per kategori, dan analisis keuangan. Fitur ini akan segera tersedia!');
+        }
+        
+        function downloadYearlyReport() {
+            alert('Laporan Keuangan Tahunan RT 002 - 2025 akan didownload. File berisi ringkasan keuangan bulanan, detail pemasukan & pengeluaran, dan grafik analisis.');
+        }
+
+        // Data Warga
+        function showDataForm(type) {
+            document.querySelectorAll('.data-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            
+            if (type === 'add') {
+                document.getElementById('add-data-form').style.display = 'block';
+                document.getElementById('view-data-form').style.display = 'none';
+            } else {
+                document.getElementById('add-data-form').style.display = 'none';
+                document.getElementById('view-data-form').style.display = 'block';
+            }
+        }
+        
+        function exportWargaData() {
+            alert('Data Warga RT 002 akan diekspor ke Excel. File berisi daftar semua warga (47 orang), data kepala keluarga (15 KK), dan statistik demografi.');
+        }
+
+        // News Detail
+        function showNewsDetail(newsType) {
+            let title = '';
+            let content = '';
+            
+            if (newsType === '17agustus') {
+                title = '🎉 Perayaan HUT RI ke-80 - 17 Agustus 2025';
+                content = 'RT 002 RW 004 Pasar Kaler akan mengadakan serangkaian kegiatan untuk memperingati HUT RI ke-80. Kegiatan meliputi lomba balap karung, makan kerupuk, panjat pinang, dan berbagai lomba tradisional lainnya.';
+            } else if (newsType === 'vaksinasi') {
+                title = '💉 Program Vaksinasi Gratis untuk Warga';
+                content = 'Program vaksinasi gratis bekerjasama dengan Puskesmas Padalarang. Tersedia vaksin COVID-19, imunisasi anak, dan vaksin influenza untuk lansia.';
+            } else if (newsType === 'renovasi') {
+                title = '🔨 Renovasi Balai Warga - Gotong Royong';
+                content = 'Balai warga RT 002 akan direnovasi dengan semangat gotong royong. Renovasi meliputi perbaikan atap, cat ulang, perbaikan lantai, dan penambahan fasilitas.';
+            }
+            
+            alert(title + '\n\n' + content + '\n\nUntuk informasi lebih lengkap, hubungi pengurus RT 002 melalui WhatsApp.');
+        }
+
+        // Gallery
+        function showGalleryImage(imageId, title) {
+            const descriptions = {
+                'upacara': 'Kegiatan upacara bendera memperingati HUT Kemerdekaan Indonesia yang diikuti oleh seluruh warga RT 002.',
+                'angklung': 'Pelestarian budaya tradisional Sunda melalui kegiatan angklung yang diadakan rutin setiap bulan.',
+                'kolak': 'Lomba memasak makanan tradisional dalam rangka memperingati hari-hari besar.',
+                'seblak': 'Kuliner lokal yang sering disajikan dalam acara-acara RT.',
+                'kopi-warga': 'Tradisi ngopi bareng warga RT 002 yang diadakan setiap sore untuk mempererat silaturahmi.',
+                'gotong-royong': 'Kegiatan gotong royong tradisional yang mencerminkan semangat kerja sama warga.',
+                'pelatihan-keterampilan': 'Program pemberdayaan warga melalui pelatihan berbagai keterampilan.',
+                'pos-ronda': 'Sistem Keamanan Lingkungan (Siskamling) untuk menjaga keamanan kampung.'
+            };
+            
+            alert('📸 ' + title + '\n\n' + descriptions[imageId] + '\n\nKlik tombol WhatsApp untuk bergabung dengan kegiatan ini!');
+        }
+
+        // Join Activity Modal
+        function joinActivity() {
+            showActivityModal();
+        }
+        
+        function showActivityModal() {
+            const modal = document.createElement('div');
+            modal.id = 'activityModal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 2000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                border-radius: 15px;
+                padding: 30px;
+                max-width: 500px;
+                width: 90%;
+                max-height: 80vh;
+                overflow-y: auto;
+                position: relative;
+                transform: scale(0.8);
+                transition: transform 0.3s ease;
+            `;
+            
+            modalContent.innerHTML = `
+                <button onclick="closeActivityModal()" style="position: absolute; top: 15px; right: 15px; background: #f3f4f6; border: none; color: #666; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;">×</button>
+                
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <h3 style="color: #1f2937; font-size: 24px; font-weight: bold; margin: 0 0 10px 0;">🤝 Bergabung dengan Kegiatan</h3>
+                    <p style="color: #6b7280; margin: 0;">RT 002 RW 004 Pasar Kaler</p>
+                </div>
+                
+                <div style="space-y: 15px;">
+                    <h4 style="color: #374151; font-size: 18px; font-weight: 600; margin: 0 0 15px 0;">Kegiatan yang Tersedia:</h4>
+                    
+                    <div onclick="selectActivity('gotong-royong')" style="padding: 15px; border: 2px solid #e5e7eb; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 10px;" onmouseover="this.style.borderColor='#10b981'; this.style.backgroundColor='#f0fdf4'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.backgroundColor='white'">
+                        <div style="display: flex; align-items: center;">
+                            <span style="font-size: 24px; margin-right: 15px;">🧹</span>
+                            <div>
+                                <h5 style="margin: 0; color: #1f2937; font-weight: 600;">Gotong Royong Rutin</h5>
+                                <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 14px;">Setiap Minggu • 07:00 WIB</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="selectActivity('pengajian')" style="padding: 15px; border: 2px solid #e5e7eb; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 10px;" onmouseover="this.style.borderColor='#3b82f6'; this.style.backgroundColor='#eff6ff'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.backgroundColor='white'">
+                        <div style="display: flex; align-items: center;">
+                            <span style="font-size: 24px; margin-right: 15px;">📖</span>
+                            <div>
+                                <h5 style="margin: 0; color: #1f2937; font-weight: 600;">Pengajian Mingguan</h5>
+                                <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 14px;">Setiap Kamis • 19:30 WIB</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="selectActivity('pelatihan')" style="padding: 15px; border: 2px solid #e5e7eb; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 10px;" onmouseover="this.style.borderColor='#f59e0b'; this.style.backgroundColor='#fffbeb'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.backgroundColor='white'">
+                        <div style="display: flex; align-items: center;">
+                            <span style="font-size: 24px; margin-right: 15px;">🎓</span>
+                            <div>
+                                <h5 style="margin: 0; color: #1f2937; font-weight: 600;">Pelatihan Keterampilan</h5>
+                                <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 14px;">Setiap Bulan • 14:00 WIB</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="selectActivity('ronda')" style="padding: 15px; border: 2px solid #e5e7eb; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 10px;" onmouseover="this.style.borderColor='#ef4444'; this.style.backgroundColor='#fef2f2'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.backgroundColor='white'">
+                        <div style="display: flex; align-items: center;">
+                            <span style="font-size: 24px; margin-right: 15px;">🌙</span>
+                            <div>
+                                <h5 style="margin: 0; color: #1f2937; font-weight: 600;">Ronda Malam</h5>
+                                <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 14px;">Setiap Hari • 21:00-05:00 WIB</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="selectActivity('17agustus')" style="padding: 15px; border: 2px solid #e5e7eb; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px;" onmouseover="this.style.borderColor='#8b5cf6'; this.style.backgroundColor='#faf5ff'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.backgroundColor='white'">
+                        <div style="display: flex; align-items: center;">
+                            <span style="font-size: 24px; margin-right: 15px;">🎉</span>
+                            <div>
+                                <h5 style="margin: 0; color: #1f2937; font-weight: 600;">Perayaan 17 Agustus</h5>
+                                <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 14px;">17 Agustus 2025 • Event Khusus</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                    <p style="color: #6b7280; font-size: 14px; margin: 0 0 15px 0;">Untuk mendaftar, silakan hubungi pengurus RT melalui WhatsApp</p>
+                    <button onclick="showAdminPanel(); closeActivityModal();" style="background: #25D366; color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">📱 Hubungi Pengurus</button>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modalContent.style.transform = 'scale(1)';
+            }, 10);
+        }
+        
+        function closeActivityModal() {
+            const modal = document.getElementById('activityModal');
+            if (modal) {
+                modal.style.opacity = '0';
+                modal.querySelector('div').style.transform = 'scale(0.8)';
+                document.body.style.overflow = 'auto';
+                setTimeout(() => {
+                    modal.remove();
+                }, 300);
+            }
+        }
+        
+        function selectActivity(activityType) {
+            const activities = {
+                'gotong-royong': 'Gotong Royong Rutin - Setiap Minggu 07:00 WIB',
+                'pengajian': 'Pengajian Mingguan - Setiap Kamis 19:30 WIB',
+                'pelatihan': 'Pelatihan Keterampilan - Setiap Bulan 14:00 WIB',
+                'ronda': 'Ronda Malam - Setiap Hari 21:00-05:00 WIB',
+                '17agustus': 'Perayaan 17 Agustus - 17 Agustus 2025'
+            };
+            
+            const message = "Halo, saya ingin mendaftar untuk kegiatan: " + activities[activityType] + ". Mohon informasi lebih lanjut. Terima kasih.";
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = "https://wa.me/628123456789?text=" + encodedMessage;
+            
+            closeActivityModal();
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId.length > 1) {
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Form submissions
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('✅ Data berhasil disimpan! Terima kasih atas partisipasi Anda.');
+                    form.reset();
+                });
+            });
+        });
+
+        // Close panels with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const mobileNav = document.getElementById('mobileNav');
+                if (mobileNav.classList.contains('active')) {
+                    toggleMobileNav();
+                }
+                hideAdminPanel();
+                closeActivityModal();
+            }
+        });
+        
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('activityModal');
+            if (modal && e.target === modal) {
+                closeActivityModal();
+            }
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
