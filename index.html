@@ -109,6 +109,197 @@
             visibility: visible;
         }
         
+        /* History Modal */
+        .history-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            z-index: 1005;
+            width: 95%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .history-modal.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .history-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1004;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .history-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .history-timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #3b82f6, #10b981, #f59e0b, #ef4444);
+        }
+        
+        .history-item {
+            position: relative;
+            padding: 15px 0 15px 60px;
+            margin-bottom: 20px;
+        }
+        
+        .history-item::before {
+            content: '';
+            position: absolute;
+            left: 21px;
+            top: 20px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border: 4px solid #3b82f6;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .history-item.ancient::before {
+            border-color: #8b5cf6;
+        }
+        
+        .history-item.colonial::before {
+            border-color: #f59e0b;
+        }
+        
+        .history-item.modern::before {
+            border-color: #10b981;
+        }
+        
+        .history-item.current::before {
+            border-color: #ef4444;
+        }
+        
+        .history-year {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .history-content {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .history-content h4 {
+            margin: 0 0 10px 0;
+            color: #1f2937;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .history-content p {
+            margin: 0;
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .history-floating-btn {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 1002;
+            animation: historyFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes historyFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(2deg); }
+            50% { transform: translateY(-5px) rotate(0deg); }
+            75% { transform: translateY(-15px) rotate(-2deg); }
+        }
+        
+        .history-btn {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .history-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(139, 92, 246, 0.6);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .history-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .history-stat {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .history-stat-number {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .history-stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
         /* Top Banner */
         .top-lyrics-banner {
             background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #FF0000 100%);
@@ -535,6 +726,42 @@
             .whatsapp-btn {
                 width: 56px;
                 height: 56px;
+            }
+            
+            .history-btn {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .history-floating-btn {
+                bottom: 160px;
+                right: 15px;
+            }
+            
+            .history-modal {
+                width: 98%;
+                max-width: none;
+                margin: 10px;
+                max-height: 90vh;
+            }
+            
+            .history-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .history-timeline::before {
+                left: 20px;
+            }
+            
+            .history-item {
+                padding-left: 45px;
+            }
+            
+            .history-item::before {
+                left: 11px;
+                width: 16px;
+                height: 16px;
             }
             
             .top-lyrics-text {
@@ -990,6 +1217,18 @@
                                 </select>
                                 <input type="number" id="usia" placeholder="Usia" class="p-2 border border-gray-300 rounded-lg text-sm" required>
                             </div>
+                            <select id="pendidikan" class="w-full p-2 border border-gray-300 rounded-lg text-sm" required>
+                                <option value="">Pendidikan Terakhir</option>
+                                <option value="Tidak Sekolah">Tidak Sekolah</option>
+                                <option value="SD/Sederajat">SD/Sederajat</option>
+                                <option value="SMP/Sederajat">SMP/Sederajat</option>
+                                <option value="SMA/SMK/Sederajat">SMA/SMK/Sederajat</option>
+                                <option value="D1/D2/D3">D1/D2/D3 (Diploma)</option>
+                                <option value="S1/Sarjana">S1/Sarjana</option>
+                                <option value="S2/Magister">S2/Magister</option>
+                                <option value="S3/Doktor">S3/Doktor</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
                             <input type="text" id="pekerjaan" placeholder="Pekerjaan" class="w-full p-2 border border-gray-300 rounded-lg text-sm">
                             <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition text-sm">
                                 💾 Simpan Data Warga
@@ -1016,17 +1255,27 @@
                         <!-- Search and Filter -->
                         <div class="mb-4 space-y-2">
                             <input type="text" id="searchWarga" placeholder="🔍 Cari nama warga..." class="w-full p-2 border border-gray-300 rounded-lg text-sm" onkeyup="searchWargaData()">
-                            <div class="flex space-x-2">
-                                <select id="filterStatus" class="flex-1 p-2 border border-gray-300 rounded-lg text-sm" onchange="filterWargaData()">
+                            <div class="grid grid-cols-3 gap-2">
+                                <select id="filterStatus" class="p-2 border border-gray-300 rounded-lg text-sm" onchange="filterWargaData()">
                                     <option value="">Semua Status</option>
                                     <option value="Kepala Keluarga">Kepala Keluarga</option>
                                     <option value="Istri">Istri</option>
                                     <option value="Anak">Anak</option>
                                 </select>
-                                <select id="filterGender" class="flex-1 p-2 border border-gray-300 rounded-lg text-sm" onchange="filterWargaData()">
+                                <select id="filterGender" class="p-2 border border-gray-300 rounded-lg text-sm" onchange="filterWargaData()">
                                     <option value="">Semua Gender</option>
                                     <option value="Pria">Pria</option>
                                     <option value="Wanita">Wanita</option>
+                                </select>
+                                <select id="filterPendidikan" class="p-2 border border-gray-300 rounded-lg text-sm" onchange="filterWargaData()">
+                                    <option value="">Semua Pendidikan</option>
+                                    <option value="SD">SD/Sederajat</option>
+                                    <option value="SMP">SMP/Sederajat</option>
+                                    <option value="SMA">SMA/SMK</option>
+                                    <option value="D3">D1/D2/D3</option>
+                                    <option value="S1">S1/Sarjana</option>
+                                    <option value="S2">S2/Magister</option>
+                                    <option value="S3">S3/Doktor</option>
                                 </select>
                             </div>
                         </div>
@@ -1039,6 +1288,7 @@
                                         <th onclick="sortTable(1)" style="cursor: pointer;">Status 📊</th>
                                         <th onclick="sortTable(2)" style="cursor: pointer;">JK 📊</th>
                                         <th onclick="sortTable(3)" style="cursor: pointer;">Usia 📊</th>
+                                        <th onclick="sortTable(4)" style="cursor: pointer;">Pendidikan 📊</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -1049,6 +1299,7 @@
                                         <td><span class="status-badge status-kk">KK</span></td>
                                         <td>Pria</td>
                                         <td>45</td>
+                                        <td><span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">SMA</span></td>
                                         <td><button onclick="showWargaDetail('Budi Santoso')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
@@ -1056,6 +1307,7 @@
                                         <td><span class="status-badge status-istri">Istri</span></td>
                                         <td>Wanita</td>
                                         <td>42</td>
+                                        <td><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">SMP</span></td>
                                         <td><button onclick="showWargaDetail('Siti Rahayu')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
@@ -1063,6 +1315,7 @@
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Pria</td>
                                         <td>17</td>
+                                        <td><span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">SMA (Kelas 11)</span></td>
                                         <td><button onclick="showWargaDetail('Ahmad Budi')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
@@ -1070,6 +1323,7 @@
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Wanita</td>
                                         <td>12</td>
+                                        <td><span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">SMP (Kelas 6)</span></td>
                                         <td><button onclick="showWargaDetail('Dewi Santoso')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     
@@ -1079,6 +1333,7 @@
                                         <td><span class="status-badge status-kk">KK</span></td>
                                         <td>Pria</td>
                                         <td>38</td>
+                                        <td><span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">D3</span></td>
                                         <td><button onclick="showWargaDetail('Rahmat Hidayat')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
@@ -1086,6 +1341,7 @@
                                         <td><span class="status-badge status-istri">Istri</span></td>
                                         <td>Wanita</td>
                                         <td>35</td>
+                                        <td><span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">SMA</span></td>
                                         <td><button onclick="showWargaDetail('Nurlaela')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
@@ -1093,6 +1349,7 @@
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Pria</td>
                                         <td>14</td>
+                                        <td><span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">SMP (Kelas 8)</span></td>
                                         <td><button onclick="showWargaDetail('Fajar Hidayat')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
@@ -1100,6 +1357,7 @@
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Wanita</td>
                                         <td>8</td>
+                                        <td><span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">SD (Kelas 2)</span></td>
                                         <td><button onclick="showWargaDetail('Sari Nurlaela')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     
@@ -1109,24 +1367,32 @@
                                         <td><span class="status-badge status-kk">KK</span></td>
                                         <td>Pria</td>
                                         <td>52</td>
+                                        <td><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">SMP</span></td>
+                                        <td><button onclick="showWargaDetail('Dedi Setiawan')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Imas Suryani</td>
                                         <td><span class="status-badge status-istri">Istri</span></td>
                                         <td>Wanita</td>
                                         <td>48</td>
+                                        <td><span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">SMA</span></td>
+                                        <td><button onclick="showWargaDetail('Imas Suryani')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Raka Dedi</td>
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Pria</td>
                                         <td>19</td>
+                                        <td><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">S1 (Semester 4)</span></td>
+                                        <td><button onclick="showWargaDetail('Raka Dedi')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Luna Imas</td>
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Wanita</td>
                                         <td>16</td>
+                                        <td><span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">SMA (Kelas 10)</span></td>
+                                        <td><button onclick="showWargaDetail('Luna Imas')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     
                                     <!-- Keluarga 4: Asep Kurnia -->
@@ -1135,18 +1401,24 @@
                                         <td><span class="status-badge status-kk">KK</span></td>
                                         <td>Pria</td>
                                         <td>41</td>
+                                        <td><span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">SMA</span></td>
+                                        <td><button onclick="showWargaDetail('Asep Kurnia')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Tuti Marlina</td>
                                         <td><span class="status-badge status-istri">Istri</span></td>
                                         <td>Wanita</td>
                                         <td>39</td>
+                                        <td><span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">D3</span></td>
+                                        <td><button onclick="showWargaDetail('Tuti Marlina')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Gilang Asep</td>
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Pria</td>
                                         <td>15</td>
+                                        <td><span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">SMP (Kelas 9)</span></td>
+                                        <td><button onclick="showWargaDetail('Gilang Asep')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     
                                     <!-- Keluarga 5: Yudi Pratama -->
@@ -1155,24 +1427,32 @@
                                         <td><span class="status-badge status-kk">KK</span></td>
                                         <td>Pria</td>
                                         <td>36</td>
+                                        <td><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">S1</span></td>
+                                        <td><button onclick="showWargaDetail('Yudi Pratama')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Rina Sari</td>
                                         <td><span class="status-badge status-istri">Istri</span></td>
                                         <td>Wanita</td>
                                         <td>33</td>
+                                        <td><span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">SMA</span></td>
+                                        <td><button onclick="showWargaDetail('Rina Sari')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Kenzo Yudi</td>
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Pria</td>
                                         <td>10</td>
+                                        <td><span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">SD (Kelas 4)</span></td>
+                                        <td><button onclick="showWargaDetail('Kenzo Yudi')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Keira Rina</td>
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Wanita</td>
                                         <td>6</td>
+                                        <td><span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">SD (Kelas 1)</span></td>
+                                        <td><button onclick="showWargaDetail('Keira Rina')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     
                                     <!-- Keluarga 6: Ujang Sutrisno -->
@@ -1181,24 +1461,32 @@
                                         <td><span class="status-badge status-kk">KK</span></td>
                                         <td>Pria</td>
                                         <td>58</td>
+                                        <td><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">SMP</span></td>
+                                        <td><button onclick="showWargaDetail('Ujang Sutrisno')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Eneng Rohayati</td>
                                         <td><span class="status-badge status-istri">Istri</span></td>
                                         <td>Wanita</td>
                                         <td>54</td>
+                                        <td><span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">SD</span></td>
+                                        <td><button onclick="showWargaDetail('Eneng Rohayati')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Agus Ujang</td>
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Pria</td>
                                         <td>22</td>
+                                        <td><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">S1</span></td>
+                                        <td><button onclick="showWargaDetail('Agus Ujang')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     <tr>
                                         <td>Wati Eneng</td>
                                         <td><span class="status-badge status-anak">Anak</span></td>
                                         <td>Wanita</td>
                                         <td>20</td>
+                                        <td><span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">D3</span></td>
+                                        <td><button onclick="showWargaDetail('Wati Eneng')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
                                     </tr>
                                     
                                     <!-- Keluarga 7: Cecep Mulyana -->
@@ -1491,23 +1779,31 @@
                             </div>
                             
                             <div class="bg-gradient-to-r from-purple-500 to-pink-600 text-white p-4 rounded-lg">
-                                <h5 class="font-semibold mb-2">📊 Statistik Lengkap</h5>
+                                <h5 class="font-semibold mb-2">🎓 Statistik Pendidikan</h5>
                                 <div class="space-y-2 text-sm">
                                     <div class="flex justify-between">
-                                        <span class="opacity-80">Keluarga Terbesar:</span>
-                                        <span class="font-bold">4 orang</span>
+                                        <span class="opacity-80">SD/Sederajat:</span>
+                                        <span class="font-bold">8 orang</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="opacity-80">Keluarga Terkecil:</span>
+                                        <span class="opacity-80">SMP/Sederajat:</span>
+                                        <span class="font-bold">12 orang</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="opacity-80">SMA/SMK:</span>
+                                        <span class="font-bold">18 orang</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="opacity-80">D1/D2/D3:</span>
+                                        <span class="font-bold">5 orang</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="opacity-80">S1/Sarjana:</span>
                                         <span class="font-bold">3 orang</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="opacity-80">Usia Tertua:</span>
-                                        <span class="font-bold">58 tahun</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="opacity-80">Usia Termuda:</span>
-                                        <span class="font-bold">6 tahun</span>
+                                        <span class="opacity-80">S2/Magister:</span>
+                                        <span class="font-bold">1 orang</span>
                                     </div>
                                 </div>
                             </div>
@@ -1589,12 +1885,169 @@
         <span id="notificationText"></span>
     </div>
     
+    <!-- History Floating Button -->
+    <div class="history-floating-btn" id="historyFloat">
+        <button class="history-btn" onclick="showHistoryModal()" title="Sejarah Tagog Apu">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+            </svg>
+        </button>
+    </div>
+
     <!-- WhatsApp Floating Button -->
     <div class="whatsapp-float" id="whatsappFloat">
         <div class="whatsapp-btn" onclick="handleWhatsAppClick()">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.106"/>
             </svg>
+        </div>
+    </div>
+
+    <!-- History Modal Overlay -->
+    <div class="history-modal-overlay" id="historyOverlay" onclick="hideHistoryModal()"></div>
+
+    <!-- History Modal -->
+    <div class="history-modal" id="historyModal">
+        <div style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; padding: 25px; border-radius: 20px 20px 0 0; position: relative;">
+            <button onclick="hideHistoryModal()" style="position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.2); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'">×</button>
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <span style="font-size: 32px; margin-right: 15px;">🏔️</span>
+                <div>
+                    <h2 style="margin: 0; font-size: 24px; font-weight: bold;">Sejarah Tagog Apu</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">Warisan Kalkrotsen yang Legendaris</p>
+                </div>
+            </div>
+            
+            <div class="history-stats">
+                <div class="history-stat">
+                    <div class="history-stat-number">1600+</div>
+                    <div class="history-stat-label">Tahun Sejarah</div>
+                </div>
+                <div class="history-stat">
+                    <div class="history-stat-number">47</div>
+                    <div class="history-stat-label">Warga RT 002</div>
+                </div>
+                <div class="history-stat">
+                    <div class="history-stat-number">15</div>
+                    <div class="history-stat-label">Kepala Keluarga</div>
+                </div>
+                <div class="history-stat">
+                    <div class="history-stat-number">80</div>
+                    <div class="history-stat-label">Tahun Merdeka</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="padding: 0 25px 25px 25px;">
+            <div style="background: #f0f9ff; padding: 20px; border-radius: 15px; margin-bottom: 20px; border-left: 5px solid #3b82f6;">
+                <h3 style="margin: 0 0 10px 0; color: #1e40af; font-size: 18px; font-weight: 600;">🌟 Tentang Tagog Apu</h3>
+                <p style="margin: 0; color: #1e40af; font-size: 14px; line-height: 1.6;">
+                    Tagog Apu adalah desa bersejarah yang terkenal dengan industri kalkrotsen (batu kapur) sejak zaman kolonial Belanda. Nama "Tagog" berasal dari bahasa Sunda yang berarti "menumbuk" dan "Apu" berarti "kapur", menggambarkan aktivitas utama masyarakat dalam mengolah batu kapur.
+                </p>
+            </div>
+            
+            <div class="history-timeline">
+                <div class="history-item ancient">
+                    <div class="history-year">Abad ke-16</div>
+                    <div class="history-content">
+                        <h4>🏛️ Era Kerajaan Pajajaran</h4>
+                        <p>Tagog Apu sudah dikenal sebagai penghasil batu kapur berkualitas tinggi. Masyarakat Sunda telah menggunakan kapur untuk berbagai keperluan konstruksi dan tradisional.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item colonial">
+                    <div class="history-year">1800-1900</div>
+                    <div class="history-content">
+                        <h4>🏭 Masa Kolonial Belanda</h4>
+                        <p>Belanda membangun industri kalkrotsen modern di Tagog Apu. Terowongan-terowongan batu kapur digali untuk mengekstrak kapur berkualitas tinggi yang diekspor ke berbagai daerah.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item colonial">
+                    <div class="history-year">1920-1942</div>
+                    <div class="history-content">
+                        <h4>🚂 Era Keemasan Industri</h4>
+                        <p>Pembangunan jalur kereta api khusus untuk mengangkut hasil tambang kapur. Tagog Apu menjadi salah satu penghasil kapur terbesar di Jawa Barat dengan ribuan pekerja.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item modern">
+                    <div class="history-year">1945-1980</div>
+                    <div class="history-content">
+                        <h4>🇮🇩 Masa Kemerdekaan</h4>
+                        <p>Setelah kemerdekaan, industri kapur dikelola oleh pemerintah Indonesia. Masyarakat Tagog Apu mulai mengembangkan usaha kecil menengah dalam pengolahan kapur dan pertanian.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item modern">
+                    <div class="history-year">1980-2000</div>
+                    <div class="history-content">
+                        <h4>🌾 Transformasi Ekonomi</h4>
+                        <p>Masyarakat beralih dari industri kapur ke pertanian dan perdagangan. Pasar Kaler berkembang menjadi pusat ekonomi lokal dengan berbagai usaha kecil dan menengah.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item current">
+                    <div class="history-year">2000-2025</div>
+                    <div class="history-content">
+                        <h4>🏘️ Era Modern RT 002</h4>
+                        <p>RT 002 RW 004 Pasar Kaler berkembang menjadi komunitas yang solid dengan 47 warga dari 15 keluarga. Memadukan tradisi gotong royong dengan teknologi modern.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+                <h3 style="margin: 0 0 15px 0; font-size: 18px; font-weight: 600;">🏭 Warisan Kalkrotsen</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-size: 14px; line-height: 1.5;">
+                    <div>
+                        <strong>🔨 Teknik Tradisional:</strong><br>
+                        Penambangan manual dengan alat sederhana yang diwariskan turun-temurun
+                    </div>
+                    <div>
+                        <strong>🌍 Kualitas Ekspor:</strong><br>
+                        Kapur Tagog Apu dikenal hingga ke Eropa karena kualitasnya yang sangat baik
+                    </div>
+                    <div>
+                        <strong>👥 Komunitas Pekerja:</strong><br>
+                        Ribuan keluarga menggantungkan hidup dari industri kapur selama berabad-abad
+                    </div>
+                    <div>
+                        <strong>🏛️ Peninggalan Sejarah:</strong><br>
+                        Terowongan-terowongan tua masih dapat ditemukan di sekitar desa
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #ecfdf5; padding: 20px; border-radius: 15px; border-left: 5px solid #10b981;">
+                <h3 style="margin: 0 0 15px 0; color: #047857; font-size: 18px; font-weight: 600;">🌟 Tagog Apu Hari Ini</h3>
+                <div style="color: #047857; font-size: 14px; line-height: 1.6;">
+                    <p style="margin: 0 0 10px 0;">
+                        <strong>🏘️ RT 002 RW 004 Pasar Kaler</strong> adalah salah satu komunitas terbaik di Tagog Apu yang masih mempertahankan nilai-nilai gotong royong dan kekeluargaan.
+                    </p>
+                    <p style="margin: 0 0 10px 0;">
+                        <strong>🎯 Visi Kami:</strong> Menjadi komunitas yang harmonis dengan memadukan tradisi dan modernitas untuk kesejahteraan bersama.
+                    </p>
+                    <p style="margin: 0;">
+                        <strong>🤝 Kegiatan Rutin:</strong> Gotong royong, pengajian, pelatihan keterampilan, dan berbagai program pemberdayaan masyarakat.
+                    </p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <p style="color: #6b7280; font-size: 14px; margin: 0 0 15px 0;">Pelajari lebih lanjut tentang sejarah dan budaya Tagog Apu</p>
+                <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                    <button onclick="showHistoryDetails('kalkrotsen')" style="background: #8b5cf6; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#7c3aed'" onmouseout="this.style.background='#8b5cf6'">
+                        🏭 Industri Kalkrotsen
+                    </button>
+                    <button onclick="showHistoryDetails('budaya')" style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#059669'" onmouseout="this.style.background='#10b981'">
+                        🎭 Budaya Sunda
+                    </button>
+                    <button onclick="showHistoryDetails('ekonomi')" style="background: #f59e0b; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#d97706'" onmouseout="this.style.background='#f59e0b'">
+                        💰 Ekonomi Modern
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1739,6 +2192,119 @@
             }
         }
 
+        // History Modal Functions
+        function showHistoryModal() {
+            document.getElementById('historyOverlay').classList.add('show');
+            document.getElementById('historyModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            showNotification('🏔️ Selamat datang di Museum Sejarah Tagog Apu virtual!');
+        }
+        
+        function hideHistoryModal() {
+            document.getElementById('historyOverlay').classList.remove('show');
+            document.getElementById('historyModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function showHistoryDetails(type) {
+            let title = '';
+            let content = '';
+            
+            if (type === 'kalkrotsen') {
+                title = '🏭 Industri Kalkrotsen Tagog Apu';
+                content = 'SEJARAH INDUSTRI KALKROTSEN:\n\n' +
+                         '🔨 TEKNIK PENAMBANGAN:\n' +
+                         '• Penambangan manual dengan beliung dan cangkul\n' +
+                         '• Pembakaran batu kapur dalam tungku tradisional\n' +
+                         '• Proses yang memakan waktu 3-5 hari per batch\n' +
+                         '• Kualitas kapur yang sangat halus dan putih\n\n' +
+                         '🚂 TRANSPORTASI:\n' +
+                         '• Jalur kereta api khusus ke pelabuhan\n' +
+                         '• Gerobak sapi untuk jarak dekat\n' +
+                         '• Sistem conveyor belt sederhana\n\n' +
+                         '🌍 EKSPOR:\n' +
+                         '• Eropa (Belanda, Jerman, Inggris)\n' +
+                         '• Asia Tenggara (Singapura, Malaysia)\n' +
+                         '• Kepulauan Nusantara\n\n' +
+                         '👥 PEKERJA:\n' +
+                         '• Sekitar 3.000 pekerja pada masa puncak\n' +
+                         '• Sistem kerja bergilir 24 jam\n' +
+                         '• Upah yang cukup baik untuk masa itu\n' +
+                         '• Komunitas pekerja yang solid\n\n' +
+                         '🏛️ WARISAN:\n' +
+                         '• Terowongan-terowongan bersejarah\n' +
+                         '• Alat-alat tradisional yang diwariskan\n' +
+                         '• Teknik pengolahan kapur turun-temurun\n' +
+                         '• Budaya kerja gotong royong yang kuat';
+            } else if (type === 'budaya') {
+                title = '🎭 Budaya Sunda di Tagog Apu';
+                content = 'WARISAN BUDAYA SUNDA:\n\n' +
+                         '🎵 SENI TRADISIONAL:\n' +
+                         '• Angklung dan gamelan degung\n' +
+                         '• Tari Jaipongan dan Ketuk Tilu\n' +
+                         '• Wayang Golek dengan lakon Sunda\n' +
+                         '• Lagu-lagu tradisional Sunda\n\n' +
+                         '🍲 KULINER KHAS:\n' +
+                         '• Seblak pedas khas Garut\n' +
+                         '• Kolak pisang ubi untuk acara adat\n' +
+                         '• Peuyeum (tape) khas Bandung\n' +
+                         '• Kue-kue tradisional untuk hajatan\n\n' +
+                         '🏠 ARSITEKTUR:\n' +
+                         '• Rumah panggung kayu jati\n' +
+                         '• Atap genteng dengan ornamen Sunda\n' +
+                         '• Halaman luas untuk acara adat\n' +
+                         '• Pendopo sebagai tempat berkumpul\n\n' +
+                         '🎪 TRADISI ACARA:\n' +
+                         '• Seren Taun (syukuran panen)\n' +
+                         '• Mapag Sri (penyambutan dewi padi)\n' +
+                         '• Ngalaksa (tradisi bulan Muharram)\n' +
+                         '• Hajatan kelahiran dan pernikahan\n\n' +
+                         '🗣️ BAHASA:\n' +
+                         '• Bahasa Sunda halus dan kasar\n' +
+                         '• Pepatah dan pribahasa Sunda\n' +
+                         '• Cerita rakyat dan legenda lokal\n' +
+                         '• Pantun dan sisindiran Sunda';
+            } else if (type === 'ekonomi') {
+                title = '💰 Ekonomi Modern Tagog Apu';
+                content = 'PERKEMBANGAN EKONOMI MODERN:\n\n' +
+                         '🏪 SEKTOR PERDAGANGAN:\n' +
+                         '• Pasar Kaler sebagai pusat ekonomi lokal\n' +
+                         '• Toko-toko kebutuhan sehari-hari\n' +
+                         '• Warung makan dan jajanan tradisional\n' +
+                         '• Kios penjualan hasil pertanian\n\n' +
+                         '🌾 SEKTOR PERTANIAN:\n' +
+                         '• Sawah dan kebun sayuran\n' +
+                         '• Peternakan ayam dan kambing\n' +
+                         '• Budidaya ikan dalam kolam\n' +
+                         '• Tanaman hias dan bunga potong\n\n' +
+                         '🏭 INDUSTRI KECIL:\n' +
+                         '• Pengolahan makanan tradisional\n' +
+                         '• Kerajinan tangan dari bambu\n' +
+                         '• Produksi batu bata dan genteng\n' +
+                         '• Jasa transportasi dan ojek\n\n' +
+                         '💼 SEKTOR JASA:\n' +
+                         '• Jasa pendidikan dan les privat\n' +
+                         '• Kesehatan dan pengobatan tradisional\n' +
+                         '• Jasa konstruksi dan bangunan\n' +
+                         '• Salon dan potong rambut\n\n' +
+                         '📊 STATISTIK EKONOMI RT 002:\n' +
+                         '• Pedagang: 8 orang (17%)\n' +
+                         '• Wiraswasta: 7 orang (15%)\n' +
+                         '• Karyawan: 5 orang (11%)\n' +
+                         '• Petani: 3 orang (6%)\n' +
+                         '• Ibu Rumah Tangga: 12 orang (26%)\n' +
+                         '• Pelajar: 15 orang (32%)\n\n' +
+                         '🎯 PROGRAM PEMBERDAYAAN:\n' +
+                         '• Pelatihan keterampilan bulanan\n' +
+                         '• Koperasi simpan pinjam RT\n' +
+                         '• Program bantuan usaha kecil\n' +
+                         '• Pemasaran produk lokal online';
+            }
+            
+            alert(title + '\n\n' + content + '\n\nUntuk informasi lebih lengkap, hubungi pengurus RT 002 melalui WhatsApp.');
+            hideHistoryModal();
+        }
+
         // WhatsApp Admin Panel
         function handleWhatsAppClick() {
             showAdminPanel();
@@ -1836,6 +2402,7 @@
             const status = document.getElementById('statusKeluarga').value;
             const jk = document.getElementById('jenisKelamin').value;
             const usia = document.getElementById('usia').value;
+            const pendidikan = document.getElementById('pendidikan').value;
             const pekerjaan = document.getElementById('pekerjaan').value;
             
             showNotification('✅ Data warga ' + nama + ' berhasil ditambahkan ke database RT 002!');
@@ -1854,11 +2421,35 @@
                 statusText = 'ANK';
             }
             
+            // Format pendidikan badge
+            let pendidikanBadge = '';
+            let pendidikanClass = 'bg-gray-100 text-gray-800';
+            
+            if (pendidikan.includes('SD')) {
+                pendidikanClass = 'bg-purple-100 text-purple-800';
+            } else if (pendidikan.includes('SMP')) {
+                pendidikanClass = 'bg-green-100 text-green-800';
+            } else if (pendidikan.includes('SMA') || pendidikan.includes('SMK')) {
+                pendidikanClass = 'bg-blue-100 text-blue-800';
+            } else if (pendidikan.includes('D1') || pendidikan.includes('D2') || pendidikan.includes('D3')) {
+                pendidikanClass = 'bg-indigo-100 text-indigo-800';
+            } else if (pendidikan.includes('S1')) {
+                pendidikanClass = 'bg-yellow-100 text-yellow-800';
+            } else if (pendidikan.includes('S2')) {
+                pendidikanClass = 'bg-orange-100 text-orange-800';
+            } else if (pendidikan.includes('S3')) {
+                pendidikanClass = 'bg-red-100 text-red-800';
+            }
+            
+            pendidikanBadge = `<span class="text-xs ${pendidikanClass} px-2 py-1 rounded-full">${pendidikan}</span>`;
+            
             row.innerHTML = `
                 <td>${nama}</td>
                 <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                 <td>${jk}</td>
                 <td>${usia}</td>
+                <td>${pendidikanBadge}</td>
+                <td><button onclick="showWargaDetail('${nama}')" class="text-blue-600 text-xs hover:underline">👁️ Detail</button></td>
             `;
             tbody.appendChild(row);
             
@@ -1871,6 +2462,7 @@
             document.getElementById('statusKeluarga').value = '';
             document.getElementById('jenisKelamin').value = '';
             document.getElementById('usia').value = '';
+            document.getElementById('pendidikan').value = '';
             document.getElementById('pekerjaan').value = '';
         }
         
@@ -1914,14 +2506,16 @@
         function filterWargaData() {
             const statusFilter = document.getElementById('filterStatus').value;
             const genderFilter = document.getElementById('filterGender').value;
+            const pendidikanFilter = document.getElementById('filterPendidikan').value;
             const table = document.getElementById('wargaTableBody');
             const rows = table.getElementsByTagName('tr');
             
             for (let i = 0; i < rows.length; i++) {
                 const cells = rows[i].getElementsByTagName('td');
-                if (cells.length >= 3) {
+                if (cells.length >= 5) {
                     const status = cells[1].textContent || cells[1].innerText;
                     const gender = cells[2].textContent || cells[2].innerText;
+                    const pendidikan = cells[4].textContent || cells[4].innerText;
                     
                     let showRow = true;
                     
@@ -1933,12 +2527,16 @@
                         showRow = false;
                     }
                     
+                    if (pendidikanFilter && !pendidikan.includes(pendidikanFilter)) {
+                        showRow = false;
+                    }
+                    
                     rows[i].style.display = showRow ? '' : 'none';
                 }
             }
             
-            if (statusFilter || genderFilter) {
-                showNotification('🗂️ Filter diterapkan: ' + (statusFilter || 'Semua Status') + ' - ' + (genderFilter || 'Semua Gender'));
+            if (statusFilter || genderFilter || pendidikanFilter) {
+                showNotification('🗂️ Filter diterapkan: ' + (statusFilter || 'Semua Status') + ' - ' + (genderFilter || 'Semua Gender') + ' - ' + (pendidikanFilter || 'Semua Pendidikan'));
             }
         }
         
@@ -1946,6 +2544,7 @@
             document.getElementById('searchWarga').value = '';
             document.getElementById('filterStatus').value = '';
             document.getElementById('filterGender').value = '';
+            document.getElementById('filterPendidikan').value = '';
             
             const table = document.getElementById('wargaTableBody');
             const rows = table.getElementsByTagName('tr');
@@ -2090,12 +2689,24 @@
                   '• Anak (6-17): 15 orang\n' +
                   '• Dewasa (18-60): 25 orang\n' +
                   '• Lansia (60+): 4 orang\n\n' +
+                  '🎓 TINGKAT PENDIDIKAN:\n' +
+                  '• SD/Sederajat: 8 orang (17%)\n' +
+                  '• SMP/Sederajat: 12 orang (26%)\n' +
+                  '• SMA/SMK/Sederajat: 18 orang (38%)\n' +
+                  '• D1/D2/D3: 5 orang (11%)\n' +
+                  '• S1/Sarjana: 3 orang (6%)\n' +
+                  '• S2/Magister: 1 orang (2%)\n\n' +
                   '💼 PEKERJAAN:\n' +
                   '• Pedagang: 8 orang\n' +
                   '• Ibu Rumah Tangga: 12 orang\n' +
                   '• Pelajar: 15 orang\n' +
                   '• Wiraswasta: 7 orang\n' +
                   '• Karyawan: 5 orang\n\n' +
+                  '📈 ANALISIS PENDIDIKAN:\n' +
+                  '• Tingkat literasi: 100%\n' +
+                  '• Lulusan SMA ke atas: 57%\n' +
+                  '• Lulusan perguruan tinggi: 19%\n' +
+                  '• Tingkat pendidikan rata-rata: SMA\n\n' +
                   'Data ini diperbarui setiap bulan oleh pengurus RT.');
         }
         
@@ -2354,6 +2965,7 @@
                     toggleMobileNav();
                 }
                 hideAdminPanel();
+                hideHistoryModal();
                 closeActivityModal();
             }
         });
@@ -2364,7 +2976,34 @@
             if (modal && e.target === modal) {
                 closeActivityModal();
             }
+            
+            const historyModal = document.getElementById('historyModal');
+            if (e.target === document.getElementById('historyOverlay')) {
+                hideHistoryModal();
+            }
         });
+        
+        // Show random history facts
+        function showHistoryFact() {
+            const facts = [
+                '🏭 Fakta Sejarah: Tagog Apu memiliki terowongan kalkrotsen sepanjang 2 km yang dibangun tahun 1920!',
+                '🚂 Fakta Menarik: Dulu ada jalur kereta api khusus untuk mengangkut kapur dari Tagog Apu ke pelabuhan!',
+                '🌍 Tahukah Anda: Kapur Tagog Apu pernah diekspor hingga ke Belanda dan Jerman pada tahun 1925!',
+                '👥 Sejarah RT 002: Kampung Pasar Kaler terbentuk dari komunitas pekerja tambang kapur yang solid!',
+                '🎭 Budaya Sunda: Tradisi angklung di RT 002 sudah ada sejak zaman kakek buyut kita!',
+                '🏔️ Legendaris: Nama "Tagog Apu" berasal dari aktivitas menumbuk (tagog) batu kapur (apu) secara tradisional!',
+                '🔥 Proses Unik: Pembakaran batu kapur memakan waktu 3-5 hari dalam tungku tradisional!',
+                '🏠 Arsitektur: Rumah-rumah lama di RT 002 dibangun dengan kapur hasil produksi sendiri!',
+                '💰 Ekonomi Dulu: Pekerja tambang kapur Tagog Apu mendapat upah yang cukup baik untuk masa itu!',
+                '🌾 Transformasi: Dari tambang kapur menjadi komunitas modern dengan 47 warga yang harmonis!'
+            ];
+            
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            showNotification(randomFact);
+        }
+        
+        // Show history facts periodically
+        setInterval(showHistoryFact, 60000); // Every minute
 
         // Notification System
         function showNotification(message) {
@@ -2453,6 +3092,16 @@
                 showNotification('🏠 Selamat datang di Website RT 002 RW 004 Pasar Kaler! Silakan jelajahi fitur-fitur kami.');
             }, 2000);
             
+            // Show history notification
+            setTimeout(() => {
+                showNotification('🏔️ Tahukah Anda? Tagog Apu terkenal dengan industri kalkrotsen sejak zaman kolonial! Klik tombol sejarah untuk info lengkap.');
+            }, 10000);
+            
+            // Show education notification
+            setTimeout(() => {
+                showNotification('🎓 Fitur Baru! Sekarang data pendidikan warga RT 002 lebih lengkap dengan filter berdasarkan tingkat pendidikan!');
+            }, 15000);
+            
             // Show periodic notifications
             setInterval(() => {
                 const notifications = [
@@ -2460,12 +3109,17 @@
                     '📖 Pengajian Kamis malam akan dimulai pukul 19:30 WIB',
                     '🎯 Pelatihan keterampilan bulan ini: Menjahit dan Handicraft',
                     '☕ Kopi warga setiap sore di pos ronda mulai pukul 16:00',
-                    '🏥 Posyandu setiap Rabu pagi untuk ibu dan balita'
+                    '🏥 Posyandu setiap Rabu pagi untuk ibu dan balita',
+                    '🏔️ Tagog Apu: Warisan industri kalkrotsen yang legendaris!',
+                    '🎭 Budaya Sunda masih terjaga di RT 002 - angklung setiap minggu',
+                    '🏭 Dari tambang kapur hingga komunitas modern - sejarah RT 002',
+                    '🌍 Kapur Tagog Apu pernah diekspor hingga ke Eropa!',
+                    '👥 47 warga RT 002 menjaga tradisi gotong royong turun temurun'
                 ];
                 
                 const randomNotification = notifications[Math.floor(Math.random() * notifications.length)];
                 showNotification(randomNotification);
-            }, 30000); // Every 30 seconds
+            }, 25000); // Every 25 seconds
         });
         
         // Animation on scroll
